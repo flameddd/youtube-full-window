@@ -1,22 +1,6 @@
 # youtube-full-window
-
-## CLI Commands
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# test the production build locally
-npm run serve
-
-# run tests with jest and enzyme
-npm run test
-```
-
-For detailed explanation on how things work, checkout the [CLI Readme](https://github.com/developit/preact-cli/blob/master/README.md).
+- input 給 user 輸入
+- 另外一顆按鈕給 user open new window without address bar
+- 再來一個 PWA install
+- CI deploy github page
+- README 來點 screenshot
