@@ -9,3 +9,5 @@
 - README 來點 screenshot
 - change ICON  youtube Full?
 - layout design
+- loading spinner
+- invalid URL warning
