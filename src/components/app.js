@@ -10,7 +10,7 @@ const getNewURL = url => {
   const vQueryString = new URL(url).searchParams.get('v')
   return isLocalhost
     ? `${window.location.origin}?v=${vQueryString}`
-    : new URL(window.location.origin).searchParams.append('v', vQueryString)
+    : new URL(`${window.location.origin}/${process.env.GITHUB_PAGES}`).searchParams.append('v', vQueryString)
 }
 
 
