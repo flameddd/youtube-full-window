@@ -4,4 +4,9 @@ export default (config, env, helpers) => {
     require("tailwindcss")("./tailwind.config.js"),
     require("autoprefixer"),
   ].concat(postCSSLoader.loader.options.plugins);
+
+  const publicPath = process.env.GITHUB_PAGES
+    ? `/${process.env.GITHUB_PAGES}/`
+    : '/';
+  config.output.publicPath = publicPath;
 };
