@@ -11,7 +11,7 @@ const getNewURL = url => {
   console.log(url)
   console.log(new URL(url))
   console.log(new URL(url).searchParams.get('v'))
-  console.log(process.env)
+  console.log(process.env.NODE_ENV)
   console.log(process.env.GITHUB_PAGES)
   console.log("============getNewURL=========")
   const vQueryString = new URL(url).searchParams.get('v')
