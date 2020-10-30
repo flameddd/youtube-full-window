@@ -1,6 +1,7 @@
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
-import '@justinribeiro/lite-youtube';
+import { useState, useEffect } from 'preact/hooks';
+import cc from 'classcat';
+import Youtube from './Youtube.js';
 import '../tailwind.css'
 import { isLocalhost } from '../utils'
 import bg from '../bg.jpg';
@@ -12,9 +13,48 @@ const getNewURL = url => {
     : new URL(window.location.origin).searchParams.append('v', vQueryString)
 }
 
+
 const App = () => {
 	const [youtubeURL, setURL] = useState("");
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [displayMode, setDisplayMode] = useState(
+    window.matchMedia('(display-mode: standalone)').matches
+    ? 'standalone'
+    : 'browser tab'
+  )
 	const { searchParams } = new URL(window.location.href);
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', event => {
+      // Prevent the mini-infobar from appearing on mobile
+      event.preventDefault();
+      // Stash the event so it can be triggered later.
+      setDeferredPrompt(event);
+    });
+
+    window.addEventListener('appinstalled', (evt) => {
+      setDisplayMode('standalone');
+    });
+
+
+    return () => {}
+  }, []);
+
+  function installPWA (event) {
+    if (!deferredPrompt) {
+      return;
+    }
+    
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+    });
+  }
 
   const onSubmit = event => {
     event.preventDefault();
@@ -27,22 +67,20 @@ const App = () => {
     'directories=no, location=no,status=no, toolbar=no, menubar=no, resizable=yes'
   );
 
-	return(
-	<div id="app" class="relative flex justify-center items-center">
+  // show PWA install button only when "browser support PWA install" && "PWA not open"
+  const showPWAButton = displayMode !== 'standalone' && !!deferredPrompt;
 
+  return(
+	<div id="app" class="relative flex justify-center items-center">
 		{searchParams.get("v") ? (
-			<lite-youtube
-				class="absolute top-0 left-0 right-0 bottom-0 m-0 p-0"
-        autoplay="1"
-				videoid={searchParams.get("v")}
-			/>
+      <Youtube videoid={searchParams.get("v")} />
 		) : (
       <>
         <div
           class="absolute top-0 left-0 right-0 bottom-0 m-0 p-0 bg-cover"
           style={{ backgroundImage: `url(${bg})`, filter: "blur(5px)" }}
         />
-        <div class="h-56 grid grid-cols-3 gap-5 grid-rows-4 w-screen sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg  bg-white rounded-lg shadow-xl p-6 z-10">
+        <div class={cc(["h-56 grid grid-cols-3 gap-5 w-screen sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg  bg-white rounded-lg shadow-xl p-6 z-10", { "grid-rows-4": showPWAButton, "grid-rows-3": !showPWAButton }])}>
           <div class="col-span-3 flex items-center justify-center text-6xl bold">
             <svg height="60px" width="66px">
               <g>
@@ -50,12 +88,13 @@ const App = () => {
                 <polygon fill="#FFFFFF" points="26.6,39.43 42.93,30 26.6,20.57"  />
               </g>
             </svg>
-            <span>Youtube full screen</span>
+            <span class="overflow-hidden whitespace-no-wrap">Youtube full screen</span>
           </div>
           <form onsubmit={onSubmit} class="col-span-2">
             <input
               class="bg-gray-200 hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-300 w-full h-full text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl p-4"
               placeholder="Youtube URL:"
+              value={youtubeURL}
               onInput={event => setURL(event.target.value)}
             />
           </form>
@@ -71,12 +110,14 @@ const App = () => {
           >
             Open Min Window
           </button>
-          <button
-            class="bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white font-bold col-span-3"
-            onClick={openMinWindow}
-          >
-            Install and Open PWA
-          </button>
+          {showPWAButton && (
+            <button
+              class="bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white font-bold col-span-3"
+              onClick={installPWA}
+            >
+              Install and Open PWA
+            </button>
+          )}
         </div>
       </>
 		)}
