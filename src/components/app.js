@@ -7,6 +7,11 @@ import { isLocalhost } from '../utils'
 import bg from '../bg.jpg';
 
 const getNewURL = url => {
+  console.log("============getNewURL=========")
+  console.log(url)
+  console.log(new URL(url))
+  console.log(new URL(url).searchParams.get('v'))
+  console.log("============getNewURL=========")
   const vQueryString = new URL(url).searchParams.get('v')
   return isLocalhost
     ? `${window.location.origin}?v=${vQueryString}`
@@ -58,6 +63,9 @@ const App = () => {
 
   const onSubmit = event => {
     event.preventDefault();
+    console.log("=====onSubmit======")
+    console.log(youtubeURL)
+    console.log("=====onSubmit======")
     window.location.assign(getNewURL(youtubeURL));
   }
 
@@ -95,7 +103,12 @@ const App = () => {
               class="bg-gray-200 hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-300 w-full h-full text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl p-4"
               placeholder="Youtube URL:"
               value={youtubeURL}
-              onInput={event => setURL(event.target.value)}
+              onInput={event => {
+                console.log("=======onInput===========")
+                console.log(event.target.value)
+                console.log("=======onInput===========")
+                setURL(event.target.value)
+              }}
             />
           </form>
           <button
