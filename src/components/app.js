@@ -7,14 +7,16 @@ import { isLocalhost } from '../utils'
 import bg from '../bg.jpg';
 
 const getNewURL = url => {
+  const vQueryString = new URL(url).searchParams.get('v')
   console.log("============getNewURL=========")
   console.log(url)
   console.log(new URL(url))
   console.log(new URL(url).searchParams.get('v'))
   console.log(process.env.NODE_ENV)
   console.log(process.env.GITHUB_PAGES)
+  console.log(new URL(`${window.location.origin}/${process.env.GITHUB_PAGES}`))
+  console.log(new URL(`${window.location.origin}/${process.env.GITHUB_PAGES}`).searchParams.append('v', vQueryString))
   console.log("============getNewURL=========")
-  const vQueryString = new URL(url).searchParams.get('v')
   return isLocalhost
     ? `${window.location.origin}?v=${vQueryString}`
     : new URL(`${window.location.origin}/${process.env.GITHUB_PAGES}`).searchParams.append('v', vQueryString)
@@ -67,6 +69,7 @@ const App = () => {
     event.preventDefault();
     console.log("=====onSubmit======")
     console.log(youtubeURL)
+    console.log(getNewURL(youtubeURL))
     console.log("=====onSubmit======")
     window.location.assign(getNewURL(youtubeURL));
   }
