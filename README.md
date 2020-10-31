@@ -14,3 +14,4 @@
 - add README
   - README 來點 screenshot
 - go back button
+- support short url: `https://youtu.be/AdNJ3fydeao`
