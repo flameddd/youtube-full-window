@@ -1,4 +1,6 @@
 export default (config, env, helpers) => {
+  config.node.process = true // fix "process is not defined"
+
   const postCSSLoader = helpers.getLoadersByName(config, 'postcss-loader')[1]
   postCSSLoader.loader.options.plugins = [
     require("tailwindcss")("./tailwind.config.js"),

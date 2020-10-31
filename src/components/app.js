@@ -6,8 +6,15 @@ import '../tailwind.css'
 import { isLocalhost } from '../utils'
 import bg from '../bg.jpg';
 
+let basename = '';
+
+if (process && process.env && process.env.GITHUB_PAGES) {
+  basename = `/${process.env.GITHUB_PAGES}`;
+}
+
 const getNewURL = url => {
-  const vQueryString = new URL(url).searchParams.get('v')
+  const vQueryString = new URL(url).searchParams.get('v');
+  const newURL = new URL(`${window.location.origin}${basename}`).searchParams.append('v', vQueryString);
   console.log("============getNewURL=========")
   console.log(url)
   console.log(new URL(url))
@@ -16,10 +23,12 @@ const getNewURL = url => {
   console.log(process.env.GITHUB_PAGES)
   console.log(new URL(`${window.location.origin}/${process.env.GITHUB_PAGES}`))
   console.log(new URL(`${window.location.origin}/${process.env.GITHUB_PAGES}`).searchParams.append('v', vQueryString))
+  console.log(newURL)
+  console.log(newURL.href)
   console.log("============getNewURL=========")
   return isLocalhost
     ? `${window.location.origin}?v=${vQueryString}`
-    : new URL(`${window.location.origin}/${process.env.GITHUB_PAGES}`).searchParams.append('v', vQueryString)
+    : newURL.href
 }
 
 
