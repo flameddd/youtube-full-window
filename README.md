@@ -12,4 +12,5 @@
 - invalid URL warning
 - improve Icon
 - add README
-  - - README 來點 screenshot
+  - README 來點 screenshot
+- go back button
