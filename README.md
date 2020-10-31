@@ -6,8 +6,10 @@
   - Install and Open PWA (detect installable)
   - Open PWA
 - CI deploy github page
-- README 來點 screenshot
 - change ICON  youtube Full?
 - layout design
 - loading spinner
 - invalid URL warning
+- improve Icon
+- add README
+  - - README 來點 screenshot
