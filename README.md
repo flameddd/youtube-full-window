@@ -15,3 +15,5 @@
   - README 來點 screenshot
 - go back button
 - support short url: `https://youtu.be/AdNJ3fydeao`
+- hide more video: https://stackoverflow.com/questions/583753/using-css-to-affect-div-style-inside-iframe
+  - maybe write blog
