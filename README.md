@@ -10,6 +10,6 @@
 - add Github Icon
 
 
-![s01](./screenshots/s01.png)  
-![s02](./screenshots/s02.png)  
+![s01](./screenshots/s01.png)
 ![s03](./screenshots/s03.png)  
+![s02](./screenshots/s02.png)  
