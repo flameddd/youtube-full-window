@@ -1,4 +1,4 @@
-# full-screen Youtube (PWA installable)
+# Full Screen Youtube website (PWA installable), No need any browser extension
 - validate youtube url, otherwise, warning error not youtube
 - invalid URL warning
 - add README
