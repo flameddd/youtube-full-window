@@ -43,8 +43,6 @@ const App = () => {
     window.addEventListener('appinstalled', (evt) => {
       setDisplayMode('standalone');
     });
-
-
     return () => {}
   }, []);
 
