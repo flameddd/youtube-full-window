@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import cc from 'classcat';
 import Youtube from './Youtube.js';
+import Github from './Github.js';
 import '../tailwind.css'
 import { isLocalhost } from '../utils'
 import bg from '../bg.jpg';
@@ -86,6 +87,9 @@ const App = () => {
           class="absolute top-0 left-0 right-0 bottom-0 m-0 p-0 bg-cover"
           style={{ backgroundImage: `url(${bg})`, filter: "blur(5px)" }}
         />
+        <a href="https://github.com/flameddd/youtube-full-window" target="_blank">
+          <Github class="absolute top-0 right-0 m-4 p-1 bg-white rounded-full hover:bg-gray-300 " width="50px" height="50px" />
+        </a>
         <div class={cc(["h-56 grid grid-cols-3 gap-5 w-screen sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg  bg-white rounded-lg shadow-xl p-6 z-10", { "grid-rows-4": showPWAButton, "grid-rows-3": !showPWAButton }])}>
           <div class="col-span-3 flex items-center justify-center text-6xl bold">
             <svg height="60px" width="66px">
