@@ -3,11 +3,9 @@
 - invalid URL warning
 - add README
   - README 來點 screenshot
-- go back button
 - support short url: `https://youtu.be/AdNJ3fydeao`
 - hide more video: https://stackoverflow.com/questions/583753/using-css-to-affect-div-style-inside-iframe
-  - maybe write blog
-- add Github Icon
+  - maybe write blog how to hide this
 
 
 ![s01](./screenshots/s01.png)

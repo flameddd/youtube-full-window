@@ -80,8 +80,17 @@ const App = () => {
   return(
 	<div id="app" class="relative flex justify-center items-center">
 		{searchParams.get("v") ? (
-      <Youtube videoid={searchParams.get("v")} />
-		) : (
+      <>
+        <div
+          class="absolute top-0 left-0 w-16 bg-purple-700 z-10 grid place-content-center text-white text-4xl bold rounded opacity-0 transition-opacity duration-500 ease-in-out animate-fadeOut hover:opacity-100 select-none cursor-pointer"
+          style={{ height: "70%", top: "calc(50% - 35%)" }}
+          onClick={() => window.location.assign(`${window.location.origin}${window.location.pathname}`)}
+        >
+          {"<"}
+        </div>
+        <Youtube class="absolute top-0 left-0 right-0 bottom-0 m-0 p-0" videoid={searchParams.get("v")} />
+      </>
+    ) : (
       <>
         <div
           class="absolute top-0 left-0 right-0 bottom-0 m-0 p-0 bg-cover"
