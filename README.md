@@ -5,6 +5,8 @@
 - add README
   - README 來點 screenshot
 - support short url: `https://youtu.be/AdNJ3fydeao`, mobile url: `https://m.youtube.com/watch?v=VTVC4weBFUA`
+- removing-unused-css
+  - https://tailwindcss.com/docs/controlling-file-size#removing-unused-css
 
 ```json
 {
