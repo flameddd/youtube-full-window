@@ -6,7 +6,8 @@
   - README 來點 screenshot
 - support short url: `https://youtu.be/AdNJ3fydeao`, mobile url: `https://m.youtube.com/watch?v=VTVC4weBFUA`
 - https://web.dev/measure/
-- apple icon
+- apple icon path
+- youtube icon link (new window)
 
 ```json
 {
